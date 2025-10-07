@@ -11,7 +11,7 @@ while True:
 
     message = input()
 
-    s.send(b"{message}\n)
+    s.send(b"{message}\n")
 
 s.close()
 
