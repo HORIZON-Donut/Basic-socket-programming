@@ -30,7 +30,7 @@ def greeting(conn):
 
     return name
 
-def brocast(message, sernder=None):
+def brocast(message, sender=None):
     
     with lock:
         for client in clients:
