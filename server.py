@@ -15,10 +15,10 @@ def to_uint32(name: str) -> int:
 
 def greeting(conn): 
 
-    conn.sendall(b"Greeting brother! First, what is your name?\n")
+    conn.sendall(b"Well come to the chat. First, enter your name?\n")
     name = conn.recv(1024).strip().decode(errors="ignore")
 
-    conn.sendall(f"Hii {name}. Nice to meet you\n".encode())
+    conn.sendall(f"Alert!! {name} Have enter the chat.\n".encode())
 
     return name
 
