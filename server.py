@@ -17,6 +17,7 @@ def greeting(conn):
     conn.sendall(f"Hii {name}. Nice to meet you\n".encode())
 
     return name
+
 def handle_client(conn):
     #greeting step
     client = greeting(conn)
@@ -29,6 +30,8 @@ def handle_client(conn):
 
         if message.lower() == "exit":
             conn.sendall(f"Bye, have a great day\n".encode())
+
+            break
 
 #        if move not in ["rock", "paper", "scissors"]:
 #            conn.sendall(b"Invalid move. Use rock/paper/scissors.\n")
