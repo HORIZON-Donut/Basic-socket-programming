@@ -7,6 +7,7 @@ import threading
 
 clients = []
 lock = threading.Lock()
+is_server_active = 0
 
 def to_uint32(name: str) -> int:
     """Convert first 4 bytes of name into unsigned int (like C cast)."""
@@ -57,7 +58,7 @@ def handle_client(conn):
     #greeting step
     client = greeting(conn)
 
-    while True:
+    while is_server_active == 0:
         data = conn.recv(1024)
 
         if not data:
@@ -97,6 +98,7 @@ def main():
 
         except KeyboardInterrupt:
             print("\n[!] Server shutdown")
+            is_server_active = 1
             s.close()
 
 if __name__ == "__main__":
