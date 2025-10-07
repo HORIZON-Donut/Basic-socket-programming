@@ -4,8 +4,6 @@ import time
 import struct
 import sys
 
-WIN_STREAK = 5
-
 def to_uint32(name: str) -> int:
     """Convert first 4 bytes of name into unsigned int (like C cast)."""
     name_bytes = name.encode("utf-8")[:4].ljust(4, b"\x00")
@@ -17,14 +15,14 @@ def greeting(conn):
     conn.sendall(b">> ")
     name = conn.recv(1024).strip().decode(errors="ignore")
 
-    conn.sendall(b"Hii {name}. Nice to meet you\n")
+    conn.sendall(f"Hii {name}. Nice to meet you\n".encode())
 
     return name
 def handle_client(conn):
     #greeting step
     client = greeting(conn)
 
-    while wins < WIN_STREAK:
+    while True:
         conn.sendall(b">> ")
         message = conn.recv(1024).strip().decode(errors="ignore")
 
