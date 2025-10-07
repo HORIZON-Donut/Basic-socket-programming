@@ -27,7 +27,7 @@ def main():
     name = input()
     s.send(f"{name}\n".encode())
 
-    threading.Thread(target=recv_msg, args=(s, ), deamon=True).start()
+    threading.Thread(target=recv_msg, args=(s, ), daemon=True).start()
 
     while True:
 
@@ -36,7 +36,7 @@ def main():
 
             s.send(f"{message}\n".encode())
 
-            if messgae.lower() == "exit":
+            if message.lower() == "exit":
                 break
 
         except KeyboardInterrupt:
