@@ -89,13 +89,13 @@ def main():
         s.listen()
         print(f"[*] Python target running on {HOST}:{PORT}")
         try:
-        while True:
-            conn, addr = s.accept()
-            print(f"[+] Connection from {addr}")
-            handle_client(conn)
+            while True:
+                conn, addr = s.accept()
+                print(f"[+] Connection from {addr}")
+                handle_client(conn)
 
-        except KeyBoardInterupt:
-            print("\n[!] Server shut down")
+        except KeyboardInterrupt:
+            print("\n[!] Server shutdown")
             s.close()
 
 if __name__ == "__main__":
