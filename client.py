@@ -8,7 +8,7 @@ s.send(f"{name}\n".encode())
 
 while True:
 
-    line = s.recvline(timeout=5)
+    line = s.recvuntil(f"{name}: ".encode(), timeout=10)
     print(line.decode(), end="")
 
     if b": " in line:
