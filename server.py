@@ -42,6 +42,17 @@ def brocast(message, sernder=None):
                     client.close()
                     clients.remove(client)
 
+def exit_point(conn, name):
+    with lock:
+        if conn in clients:
+            clients.remove(conn)
+
+        conn.close()
+        message = f"{name} have leave the chat\n".encode()
+        print(message.decode())
+
+        brocast(message)
+
 def handle_client(conn):
     #greeting step
     client = greeting(conn)
