@@ -8,7 +8,8 @@ s.send(f"{name}\n".encode())
 
 while True:
 
-    print(s.recvline())
+    line = s.recvline(timeout=5)
+    print(line.decode(), end="")
 
     if b": " in line:
         message = input()
