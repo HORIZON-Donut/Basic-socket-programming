@@ -25,8 +25,8 @@ def greeting(conn):
     message = f"New chatter: {name} Have enter the chat.\n".encode()
 
     print(f"{name} have enter the chat\n");
-    brocast(message, conn)
-    conn.settimeput(5)
+    brocast(message)
+    conn.settimeout(5)
 
     new_client(conn)
 
@@ -35,7 +35,7 @@ def greeting(conn):
 def brocast(message, sender=None):
     
     with lock:
-        for client in clients:
+        for client in clients[:]:
             if client != sender:
                 try:
                     client.sendall(message)
@@ -49,7 +49,6 @@ def exit_point(conn, name):
         if conn in clients:
             clients.remove(conn)
 
-        conn.close()
         message = f"{name} have leave the chat\n".encode()
         print(message.decode())
 
@@ -60,7 +59,13 @@ def handle_client(conn):
     client = greeting(conn)
 
     while is_server_active == 0:
-        data = conn.recv(1024)
+        try:
+            data = conn.recv(1024)
+        except socket.timeout:
+            continue
+
+        except:
+            break
 
         if not data:
             break
@@ -79,6 +84,7 @@ def handle_client(conn):
     conn.close()
 
 def main():
+    golbal is_server_active
     if len(sys.argv) != 2:
         print(f"Usage: python3 {sys.argv[0]} <port>")
         sys.exit(1)
