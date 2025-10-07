@@ -26,7 +26,9 @@ def handle_client(conn):
 
     while wins < WIN_STREAK:
         conn.sendall(b">> ")
-#        move = conn.recv(1024).strip().decode(errors="ignore").lower()
+        message = conn.recv(1024).strip().decode(errors="ignore")
+
+        print(message)
 
 #        if move not in ["rock", "paper", "scissors"]:
 #            conn.sendall(b"Invalid move. Use rock/paper/scissors.\n")
