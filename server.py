@@ -33,27 +33,6 @@ def handle_client(conn):
 
             break
 
-#        if move not in ["rock", "paper", "scissors"]:
-#            conn.sendall(b"Invalid move. Use rock/paper/scissors.\n")
-#            continue
-
-#        server_move = ["rock", "paper", "scissors"][random.randint(0, 2)]
-#        conn.sendall(f"Server plays {server_move}\n".encode())
-
-        # result calculation
-#        result = (["rock", "paper", "scissors"].index(move) -
-#                  ["rock", "paper", "scissors"].index(server_move)) % 3
-
-#        if result == 1:
-#            wins += 1
-#            conn.sendall(f"You win! ({wins}/{WIN_STREAK})\n".encode())
-#        elif result == 2:
-#            wins = 0
-#            conn.sendall(b"You lose! Streak reset.\n")
-#        else:
-#            conn.sendall(b"Tie. Try again.\n")
-
-#    conn.sendall(b"Congratulations! FLAG{dummy-flag}\n")
     conn.close()
 
 def main():
