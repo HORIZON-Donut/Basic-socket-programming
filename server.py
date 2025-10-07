@@ -27,6 +27,9 @@ def handle_client(conn):
 
         print(message)
 
+        if message.lower() == "exit":
+            conn.sendall(f"Bye, have a great day\n".encode())
+
 #        if move not in ["rock", "paper", "scissors"]:
 #            conn.sendall(b"Invalid move. Use rock/paper/scissors.\n")
 #            continue
