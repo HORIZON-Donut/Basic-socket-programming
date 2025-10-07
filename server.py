@@ -11,14 +11,16 @@ def to_uint32(name: str) -> int:
     name_bytes = name.encode("utf-8")[:4].ljust(4, b"\x00")
     return struct.unpack("<I", name_bytes)[0]
 
-def handle_client(conn):
-    conn.sendall(b"Let's play rock, paper, scissors!\n")
-    conn.sendall(b"Your name> ")
+def greeting(conn): 
+
+    conn.sendall(b"Greeting brother! First, what is your name?\n")
+    conn.sendall(b">> ")
     name = conn.recv(1024).strip().decode(errors="ignore")
 
-    # seed RNG similar to C's srand(*(unsigned int*)name + time(NULL))
-    seed = to_uint32(name) + int(time.time())
-    random.seed(seed)
+    return name
+def handle_client(conn):
+    #greeting step
+    client = greeting(conn)
 
     wins = 0
     while wins < WIN_STREAK:
