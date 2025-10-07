@@ -6,7 +6,7 @@ import sys
 import threading
 
 client = []
-lock = threading.lock()
+lock = threading.Lock()
 
 def to_uint32(name: str) -> int:
     """Convert first 4 bytes of name into unsigned int (like C cast)."""
