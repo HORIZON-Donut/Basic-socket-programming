@@ -92,7 +92,8 @@ def main():
             while True:
                 conn, addr = s.accept()
                 print(f"[+] Connection from {addr}")
-                handle_client(conn)
+                thread = threading.Thread(target=handle_clinet, args=(conn))
+                thread.start()
 
         except KeyboardInterrupt:
             print("\n[!] Server shutdown")
