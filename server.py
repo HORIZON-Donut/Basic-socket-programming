@@ -66,7 +66,7 @@ def handle_client(conn):
         message = data.strip().decode()
 
         if message.lower() == "exit":
-            exit_point(conn, name)
+            exit_point(conn, client)
             break
 
         msg = f"{client}: {message}\n".encode()
