@@ -71,7 +71,7 @@ def handle_client(conn):
             break
 
         msg = f"{client}: {message}\n".encode()
-        print(msg.decode())
+        print(msg.decode(), end="")
 
         brocast(msg, conn)
 

@@ -7,7 +7,7 @@ def recv_msg(s):
             message = s.recvline(timeout = 1)
 
             if message:
-                print(message.decode())
+                print(message.decode(), end="")
         except EOFError:
             break
 
