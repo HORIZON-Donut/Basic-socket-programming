@@ -17,14 +17,15 @@ def greeting(conn):
     conn.sendall(b">> ")
     name = conn.recv(1024).strip().decode(errors="ignore")
 
+    conn.sendall(b"Hii {name}. Nice to meet you\n")
+
     return name
 def handle_client(conn):
     #greeting step
     client = greeting(conn)
 
-    wins = 0
     while wins < WIN_STREAK:
-        conn.sendall(b"Your turn> ")
+        conn.sendall(b">> ")
 #        move = conn.recv(1024).strip().decode(errors="ignore").lower()
 
 #        if move not in ["rock", "paper", "scissors"]:
