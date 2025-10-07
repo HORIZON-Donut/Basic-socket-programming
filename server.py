@@ -26,6 +26,7 @@ def greeting(conn):
 
     print(f"{name} have enter the chat\n");
     brocast(message, conn)
+    conn.settimeput(5)
 
     new_client(conn)
 
