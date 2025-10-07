@@ -27,14 +27,21 @@ def main():
     name = input()
     s.send(f"{name}\n".encode())
 
+    threading.Thread(target=recv_msg, args=(s, ), deamon=True).start()
+
     while True:
 
-        line = s.recvuntil(f"{name}: ".encode(), timeout=10)
-        print(line.decode(), end="")
-
-        if b": " in line:
+        try:
             message = input()
+
             s.send(f"{message}\n".encode())
+
+            if messgae.lower() == "exit":
+                break
+
+        except KeyboardInterrupt:
+            s.send(b"exit\n")
+            break
 
     s.close()
 
