@@ -24,7 +24,7 @@ def handle_client(conn):
 
     while True:
         conn.sendall(f"{client}: ".encode())
-        message = conn.recv(1024).strip().decode(errors="ignore")
+        message = conn.recv(1024).strip().decode()
 
         print(message)
 
