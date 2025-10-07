@@ -22,8 +22,17 @@ def greeting(conn):
 
     return name
 
-def server_message(conn):
-    pass
+def brocast(message, sernder=None):
+    
+    with lock:
+        for client in clients:
+            if client != sender:
+                try:
+                    client.sendall(message)
+
+                except:
+                    client.close()
+                    clients.remove(client)
 
 def handle_client(conn):
     #greeting step
