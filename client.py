@@ -2,7 +2,13 @@ from pwn import *
 import threading
 
 def main():
-    s = remote("localhost", 1234)
+    
+    print("welcome. enter target ip and pont")
+
+    ip = input("IP: ")
+    port = int(input("Port: "))
+
+    s = remote(ip, port)
     print(s.recvline())
 
     name = input()
