@@ -18,6 +18,9 @@ def greeting(conn):
 
     return name
 
+def server_message(conn):
+    pass
+
 def handle_client(conn):
     #greeting step
     client = greeting(conn)
