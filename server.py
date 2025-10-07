@@ -12,7 +12,6 @@ def to_uint32(name: str) -> int:
 def greeting(conn): 
 
     conn.sendall(b"Greeting brother! First, what is your name?\n")
-    conn.sendall(b">> ")
     name = conn.recv(1024).strip().decode(errors="ignore")
 
     conn.sendall(f"Hii {name}. Nice to meet you\n".encode())
@@ -23,7 +22,7 @@ def handle_client(conn):
     client = greeting(conn)
 
     while True:
-        conn.sendall(b">> ")
+        conn.sendall(f"{client}: ".encode())
         message = conn.recv(1024).strip().decode(errors="ignore")
 
         print(message)
