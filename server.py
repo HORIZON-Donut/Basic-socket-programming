@@ -13,7 +13,7 @@ def to_uint32(name: str) -> int:
     name_bytes = name.encode("utf-8")[:4].ljust(4, b"\x00")
     return struct.unpack("<I", name_bytes)[0]
 
-def newa_client(conn):
+def new_client(conn):
     with lock:
         clients.append(conn)
 
@@ -25,6 +25,8 @@ def greeting(conn):
 
     print(f"{name} have enter the chat\n");
     brocast(message, conn)
+
+    new_client(conn)
 
     return name
 
