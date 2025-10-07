@@ -1,17 +1,18 @@
 from pwn import *
 
 s = remote("localhost", 1234)
-# s.send(b"hello\n")
-# print(s.recvline())
-# s.close()
+print(s.recvline())
+
+name = input()
+s.send(f"{name}\n".encode())
 
 while True:
 
     print(s.recvline())
 
-    message = input()
-
-    s.send(b"{message}\n")
+    if b": " in line:
+        message = input()
+        s.send(f"{message}\n".encode())
 
 s.close()
 
