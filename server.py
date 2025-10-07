@@ -47,15 +47,20 @@ def handle_client(conn):
     client = greeting(conn)
 
     while True:
-        conn.sendall(f"{client}: ".encode())
-        message = conn.recv(1024).strip().decode()
+        data = conn.recv(1024)
 
-        print(message)
+        if not data:
+            break
+
+        message = data.strip().decode()
 
         if message.lower() == "exit":
-            conn.sendall(f"Bye, have a great day\n".encode())
-
             break
+
+        msg = f"{client}: {message}\n".encode()
+        print(msg.decode())
+
+        brocast(msg, conn)
 
     conn.close()
 
