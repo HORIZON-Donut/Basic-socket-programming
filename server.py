@@ -5,7 +5,7 @@ import struct
 import sys
 import threading
 
-client = []
+clients = []
 lock = threading.Lock()
 
 def to_uint32(name: str) -> int:
@@ -92,7 +92,7 @@ def main():
             while True:
                 conn, addr = s.accept()
                 print(f"[+] Connection from {addr}")
-                thread = threading.Thread(target=handle_client, args=(conn))
+                thread = threading.Thread(target=handle_client, args=(conn, ))
                 thread.start()
 
         except KeyboardInterrupt:
