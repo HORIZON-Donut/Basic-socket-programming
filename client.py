@@ -1,6 +1,19 @@
 from pwn import *
 import threading
 
+def recv_msg(s):
+    while True:
+        try:
+            message = s.recvline(timeout = 1)
+
+            if message:
+                print(message.decode())
+        except EOFError:
+            break
+
+        except:
+            pass
+
 def main():
     
     print("welcome. enter target ip and pont")
