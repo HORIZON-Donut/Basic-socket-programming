@@ -1,19 +1,21 @@
 from pwn import *
+import threading
 
-s = remote("localhost", 1234)
-print(s.recvline())
+def main():
+    s = remote("localhost", 1234)
+    print(s.recvline())
 
-name = input()
-s.send(f"{name}\n".encode())
+    name = input()
+    s.send(f"{name}\n".encode())
 
-while True:
+    while True:
 
-    line = s.recvuntil(f"{name}: ".encode(), timeout=10)
-    print(line.decode(), end="")
+        line = s.recvuntil(f"{name}: ".encode(), timeout=10)
+        print(line.decode(), end="")
 
-    if b": " in line:
-        message = input()
-        s.send(f"{message}\n".encode())
+        if b": " in line:
+            message = input()
+            s.send(f"{message}\n".encode())
 
-s.close()
+    s.close()
 
