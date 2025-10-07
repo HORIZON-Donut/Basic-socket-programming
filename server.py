@@ -17,8 +17,10 @@ def greeting(conn):
 
     conn.sendall(b"Well come to the chat. First, enter your name?\n")
     name = conn.recv(1024).strip().decode(errors="ignore")
+    message = f"New chatter: {name} Have enter the chat.\n".encode()
 
-    conn.sendall(f"Alert!! {name} Have enter the chat.\n".encode())
+    print(f"{name} have enter the chat\n");
+    brocast(message, conn)
 
     return name
 
