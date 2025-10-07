@@ -34,15 +34,14 @@ def greeting(conn):
 
 def brocast(message, sender=None):
     
-    with lock:
-        for client in clients[:]:
-            if client != sender:
-                try:
-                    client.sendall(message)
+    for client in clients[:]:
+        if client != sender:
+            try:
+                client.sendall(message)
 
-                except:
-                    client.close()
-                    clients.remove(client)
+            except:
+                print("Something went wrong in broacast function")
+
 
 def exit_point(conn, name):
     with lock:
